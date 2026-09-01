@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Conpay — Invoices as Collateral</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Desktop Phone Bezel Wrapper -->
+    <div id="device-frame">
+        <div id="phone-bezel">
+            <!-- iOS Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="time">9:41</span>
+                </div>
+                <div class="status-notch"></div>
+                <div class="status-right">
+                    <svg width="17" height="11" viewBox="0 0 17 11"><path fill="currentColor" d="M15.5 2h.5c.6 0 1 .4 1 1v5c0 .6-.4 1-1 1h-.5v-7z"/><path fill="currentColor" opacity=".4" d="M1 1h13c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H1c-.6 0-1-.4-1-1V2c0-.6.4-1 1-1z"/></svg>
+                    <svg width="17" height="11" viewBox="0 0 17 11"><path fill="currentColor" d="M13 4l3-3v9l-3-3V4z"/><rect width="11" height="11" rx="2" fill="currentColor"/></svg>
+                    <svg width="25" height="11" viewBox="0 0 25 11"><path fill="currentColor" d="M0 0h5c.6 0 1 .4 1 1v9c0 .6-.4 1-1 1H0V0zm7 0h5c.6 0 1 .4 1 1v9c0 .6-.4 1-1 1H7V0zm7 0h5c.6 0 1 .4 1 1v9c0 .6-.4 1-1 1h-5V0zm7 0h4v11h-4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1z"/></svg>
+                </div>
+            </div>
+
+            <!-- Main App Container -->
+            <div id="app-container">
+                <!-- All Screens -->
+                <div id="screens-container">
+                    
+                    <!-- Splash Screen -->
+                    <div class="screen active" id="screen-splash">
+                        <div class="splash-content">
+                            <div class="logo-mark">
+                                <svg width="64" height="64" viewBox="0 0 64 64">
+                                    <rect x="8" y="16" width="48" height="32" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    <path d="M20 24h24M20 32h24M20 40h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h1 class="splash-title">Conpay</h1>
+                            <p class="splash-tagline">Invoices are promises.<br>Conpay makes them collateral.</p>
+                            <p class="splash-subtitle">Humans today, agents tomorrow —<br>same primitive.</p>
+                            <button class="btn-primary" onclick="navigateTo('screen-world-id')">Get Started</button>
+                            <button class="btn-secondary" onclick="startDemo()">▶ Play Demo</button>
+                        </div>
+                    </div>
+
+                    <!-- World ID Verification Screen -->
+                    <div class="screen" id="screen-world-id">
+                        <div class="screen-header">
+                            <h2>World ID Verification</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="verification-box success">
+                                <div class="verification-icon">
+                                    <svg width="80" height="80" viewBox="0 0 80 80">
+                                        <circle cx="40" cy="40" r="38" stroke="var(--accent)" stroke-width="4" fill="none"/>
+                                        <path d="M25 40l10 10 20-20" stroke="var(--accent)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>Identity Verified</h3>
+                                <p>Sybil-resistant proof confirmed</p>
+                                <div class="verified-badge">
+                                    <svg width="20" height="20" viewBox="0 0 20 20">
+                                        <path d="M10 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="var(--accent)"/>
+                                    </svg>
+                                    World ID
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <p><strong>Settlement Score Enabled</strong></p>
+                                <p class="text-muted">Your verified identity unlocks trustless invoicing with pledge capabilities based on your on-chain reputation.</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="navigateTo('screen-home')">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Home Screen -->
+                    <div class="screen" id="screen-home">
+                        <div class="screen-header">
+                            <h2>Overview</h2>
+                            <div class="role-badge" onclick="toggleRoleSwitch()">
+                                <span id="current-role">Client</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12">
+                                    <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="screen-content">
+                            <div class="balance-card">
+                                <div class="balance-label">Active Escrow</div>
+                                <div class="balance-amount">10,000 <span class="currency">USDC</span></div>
+                                <div class="balance-detail">
+                                    <div class="yield-ticker">
+                                        <span class="yield-label">Yield accruing</span>
+                                        <span class="yield-value" id="yield-amount">0.47</span> <span class="currency">USDC</span>
+                                    </div>
+                                    <div class="yield-apy">APY 4.2%</div>
+                                </div>
+                            </div>
+
+                            <div class="stat-grid">
+                                <div class="stat-card">
+                                    <div class="stat-label">Your Rebate</div>
+                                    <div class="stat-value" id="rebate-amount">0.24</div>
+                                    <div class="stat-sublabel">50% of yield</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Settlement Score</div>
+                                    <div class="stat-value" id="score-value">847</div>
+                                    <div class="stat-sublabel">Tier 2 · 70% cap</div>
+                                </div>
+                            </div>
+
+                            <div class="escrow-card" onclick="navigateTo('screen-escrow-detail')">
+                                <div class="escrow-header">
+                                    <div>
+                                        <div class="escrow-title">Northline Agency</div>
+                                        <div class="escrow-subtitle">Arc Testnet</div>
+                                    </div>
+                                    <div class="status-pill status-funded">Funded</div>
+                                </div>
+                                <div class="escrow-body">
+                                    <div class="escrow-amount">10,000 USDC</div>
+                                    <div class="escrow-meta">
+                                        <span>Created 2h ago</span>
+                                        <span>·</span>
+                                        <span>1 pledge</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-header">
+                                    <span>Insurance Pool</span>
+                                    <span class="info-value">47,293 USDC</span>
+                                </div>
+                                <p class="text-muted small">Covers shortfalls for accepted work in disputed settlements</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Create Escrow Screen -->
+                    <div class="screen" id="screen-create-escrow">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-home')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Create Escrow</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="form-group">
+                                <label>Payee</label>
+                                <input type="text" class="form-input" value="northline.eth" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <div class="input-with-currency">
+                                    <input type="text" class="form-input" value="10,000" readonly>
+                                    <span class="input-currency">USDC</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Arbiter</label>
+                                <input type="text" class="form-input" value="ethlegal.eth" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Verifier (optional)</label>
+                                <input type="text" class="form-input" placeholder="Contract address or none">
+                                <p class="form-hint">For agent workflows: IVerifier contract that can auto-approve</p>
+                            </div>
+                            <div class="info-card">
+                                <p class="small"><strong>Yield Split</strong></p>
+                                <div class="yield-split-viz">
+                                    <div class="split-bar">
+                                        <div class="split-segment" style="width: 50%; background: var(--accent);" title="Payer Rebate"></div>
+                                        <div class="split-segment" style="width: 30%; background: var(--blue);" title="Insurance Pool"></div>
+                                        <div class="split-segment" style="width: 20%; background: var(--text-muted);" title="Protocol"></div>
+                                    </div>
+                                    <div class="split-labels">
+                                        <span class="small">50% You</span>
+                                        <span class="small">30% Insurance</span>
+                                        <span class="small">20% Protocol</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="createEscrow()">Fund Escrow</button>
+                        </div>
+                    </div>
+
+                    <!-- Escrow Detail Screen -->
+                    <div class="screen" id="screen-escrow-detail">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-home')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Escrow Details</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="escrow-state-card">
+                                <div class="state-header">
+                                    <span class="state-label">Status</span>
+                                    <div class="status-pill status-funded" id="escrow-status">Funded</div>
+                                </div>
+                                <div class="state-timeline">
+                                    <div class="state-node active">Created</div>
+                                    <div class="state-line active"></div>
+                                    <div class="state-node active">Funded</div>
+                                    <div class="state-line"></div>
+                                    <div class="state-node" id="state-node-release">Release Req.</div>
+                                    <div class="state-line"></div>
+                                    <div class="state-node">Settled</div>
+                                </div>
+                            </div>
+
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Face Value</span>
+                                    <span class="detail-value">10,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Yield Accrued</span>
+                                    <span class="detail-value accent" id="escrow-yield">0.47 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Payer</span>
+                                    <span class="detail-value">client.eth <span class="verified-mini">✓</span></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Payee</span>
+                                    <span class="detail-value">northline.eth <span class="verified-mini">✓</span></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Arbiter</span>
+                                    <span class="detail-value">ethlegal.eth</span>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Yield Distribution</h3>
+                            </div>
+                            <div class="yield-split-detail">
+                                <div class="split-row">
+                                    <span>Payer Rebate (50%)</span>
+                                    <span class="split-value accent" id="split-payer">0.24 USDC</span>
+                                </div>
+                                <div class="split-row">
+                                    <span>Insurance Pool (30%)</span>
+                                    <span class="split-value" id="split-insurance">0.14 USDC</span>
+                                </div>
+                                <div class="split-row">
+                                    <span>Protocol (20%)</span>
+                                    <span class="split-value" id="split-protocol">0.09 USDC</span>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Pledges</h3>
+                                <button class="btn-icon" onclick="navigateTo('screen-create-pledge')" id="btn-create-pledge">
+                                    <svg width="20" height="20" viewBox="0 0 20 20">
+                                        <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="pledges-list">
+                                <div class="pledge-card" onclick="navigateTo('screen-pledge-detail')">
+                                    <div class="pledge-header">
+                                        <div>
+                                            <div class="pledge-to">Maya Chen</div>
+                                            <div class="pledge-address">mayachen.eth</div>
+                                        </div>
+                                        <div class="pledge-status status-pill status-accepted">Accepted</div>
+                                    </div>
+                                    <div class="pledge-body">
+                                        <div class="pledge-amount">2,000 USDC</div>
+                                        <div class="pledge-type">Conditional sub-escrow</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons" id="escrow-actions">
+                                <button class="btn-secondary" onclick="navigateTo('screen-request-release')" id="btn-request-release">Request Release</button>
+                                <button class="btn-outline" onclick="navigateTo('screen-dispute')" id="btn-dispute">Dispute</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Create Pledge Screen -->
+                    <div class="screen" id="screen-create-pledge">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-escrow-detail')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Create Pledge</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="info-card">
+                                <p class="small"><strong>Irrevocable Commitment</strong></p>
+                                <p class="text-muted small">Once accepted, this pledge routes payment when the parent escrow settles. No money leaves your account until settlement.</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Pledgee</label>
+                                <input type="text" class="form-input" value="mayachen.eth" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <div class="input-with-currency">
+                                    <input type="text" class="form-input" value="2,000" readonly>
+                                    <span class="input-currency">USDC</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select class="form-input" disabled>
+                                    <option>Conditional sub-escrow</option>
+                                    <option>Unconditional routing</option>
+                                </select>
+                                <p class="form-hint">Conditional = Maya must accept work. Insurance covers shortfalls if parent disputed.</p>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Available to pledge</span>
+                                    <span class="detail-value">7,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Your settlement score</span>
+                                    <span class="detail-value">Tier 2 (70% cap)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="createPledge()">Create Pledge</button>
+                        </div>
+                    </div>
+
+                    <!-- Pledge Detail / Acceptance Screen -->
+                    <div class="screen" id="screen-pledge-detail">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-escrow-detail')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Pledge Offer</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="pledge-offer-card">
+                                <div class="offer-amount">2,000 USDC</div>
+                                <div class="offer-from">
+                                    <span class="text-muted">From</span>
+                                    <strong>Northline Agency</strong>
+                                    <span class="verified-mini">✓</span>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Proof of Payment</h3>
+                            </div>
+                            <div class="proof-card">
+                                <div class="proof-row">
+                                    <svg width="16" height="16" viewBox="0 0 16 16">
+                                        <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="var(--accent)"/>
+                                    </svg>
+                                    <span>Parent escrow exists</span>
+                                </div>
+                                <div class="proof-row">
+                                    <svg width="16" height="16" viewBox="0 0 16 16">
+                                        <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="var(--accent)"/>
+                                    </svg>
+                                    <span>Funded with 10,000 USDC</span>
+                                </div>
+                                <div class="proof-row">
+                                    <svg width="16" height="16" viewBox="0 0 16 16">
+                                        <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="var(--accent)"/>
+                                    </svg>
+                                    <span>2,000 USDC irrevocably assigned</span>
+                                </div>
+                                <div class="proof-row">
+                                    <svg width="16" height="16" viewBox="0 0 16 16">
+                                        <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" fill="var(--accent)"/>
+                                    </svg>
+                                    <span>On-chain verifiable</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small"><strong>Conditional Sub-Escrow</strong></p>
+                                <p class="text-muted small">You'll receive payment when the parent settles, paid first in the waterfall. If parent is disputed and you've accepted the work, insurance covers any shortfall.</p>
+                            </div>
+
+                            <div class="cyt-preview" id="cyt-preview">
+                                <p class="text-muted small">Accept to receive your CYT badge →</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="acceptPledge()" id="btn-accept-pledge">Accept & Mint CYT</button>
+                        </div>
+                    </div>
+
+                    <!-- Request Release Screen -->
+                    <div class="screen" id="screen-request-release">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-escrow-detail')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Request Release</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="info-card">
+                                <p><strong>Work Complete</strong></p>
+                                <p class="text-muted">The payer has 7 days (T_review) to approve or dispute. If no action, funds release automatically.</p>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Amount to release</span>
+                                    <span class="detail-value">10,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Plus accrued yield split</span>
+                                    <span class="detail-value accent">~0.50 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Review window</span>
+                                    <span class="detail-value">7 days</span>
+                                </div>
+                            </div>
+                            <div class="timeline-card">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot active"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Request submitted</div>
+                                        <div class="timeline-time">Now</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Payer review</div>
+                                        <div class="timeline-time">Within 7 days</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Auto-release or dispute</div>
+                                        <div class="timeline-time" id="release-deadline">Sep 8, 2026</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="requestRelease()">Submit Request</button>
+                        </div>
+                    </div>
+
+                    <!-- Dispute Screen -->
+                    <div class="screen" id="screen-dispute">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-escrow-detail')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>File Dispute</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="warning-card">
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 20h20L12 2z" fill="none" stroke="var(--red)" stroke-width="2"/>
+                                    <path d="M12 9v5M12 16v1" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <div>
+                                    <p><strong>Dispute Bond Required</strong></p>
+                                    <p class="text-muted small">2% of escrow value (min 5 USDC) will be locked. Returned if arbiter finds in your favor.</p>
+                                </div>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Escrow value</span>
+                                    <span class="detail-value">10,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Bond required</span>
+                                    <span class="detail-value">200 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Arbiter</span>
+                                    <span class="detail-value">ethlegal.eth</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reason</label>
+                                <textarea class="form-input" rows="4" placeholder="Describe the issue..." readonly>Work delivered does not meet specifications outlined in original agreement. Multiple revision requests ignored.</textarea>
+                            </div>
+                            <div class="info-card">
+                                <p class="small text-muted">Yield continues to accrue during dispute but is directed to the insurance pool. Arbiter ruling determines final distribution and settlement score impact.</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="fileDispute()">File Dispute (200 USDC)</button>
+                        </div>
+                    </div>
+
+                    <!-- Arbiter Ruling Screen -->
+                    <div class="screen" id="screen-arbiter">
+                        <div class="screen-header">
+                            <h2>Arbiter Ruling</h2>
+                            <div class="role-badge">Arbiter</div>
+                        </div>
+                        <div class="screen-content">
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Escrow</span>
+                                    <span class="detail-value">10,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Payer</span>
+                                    <span class="detail-value">client.eth</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Payee</span>
+                                    <span class="detail-value">northline.eth</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Pledges</span>
+                                    <span class="detail-value">2,000 USDC to mayachen.eth</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Payee Share (basis points, 10000 = 100%)</label>
+                                <input type="number" class="form-input" value="5000" readonly>
+                                <p class="form-hint">5000 bps = 50% of face value</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Fault Assignment</label>
+                                <select class="form-input" disabled>
+                                    <option>PayerFault</option>
+                                    <option>PayeeFault</option>
+                                    <option>NoFault</option>
+                                </select>
+                            </div>
+                            <div class="ruling-preview">
+                                <div class="section-header">
+                                    <h3>Settlement Preview</h3>
+                                </div>
+                                <div class="detail-card">
+                                    <div class="detail-row">
+                                        <span>Available</span>
+                                        <span class="detail-value">5,000 USDC</span>
+                                    </div>
+                                    <div class="detail-row accent">
+                                        <span>Pledgee (Maya)</span>
+                                        <span class="detail-value">2,000 USDC</span>
+                                    </div>
+                                    <div class="detail-row accent">
+                                        <span>Insurance top-up</span>
+                                        <span class="detail-value">0 USDC</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Payee residual</span>
+                                        <span class="detail-value">3,000 USDC</span>
+                                    </div>
+                                </div>
+                                <div class="info-card">
+                                    <p class="small text-muted">Maya's work was accepted. Conditional pledge guaranteed. Client's settlement score will decrease.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="issueRuling()">Issue Ruling</button>
+                        </div>
+                    </div>
+
+                    <!-- Settlement Waterfall Screen -->
+                    <div class="screen" id="screen-waterfall">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-escrow-detail')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Settlement</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="waterfall-header">
+                                <div class="waterfall-total">5,000 USDC</div>
+                                <p class="text-muted">Available after ruling (50% of face)</p>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Juniors-First Waterfall</h3>
+                            </div>
+
+                            <div class="waterfall-viz">
+                                <div class="waterfall-bar">
+                                    <div class="waterfall-segment pledgee" style="width: 40%;" id="waterfall-pledgee">
+                                        <span class="waterfall-label">Maya (Pledgee)</span>
+                                        <span class="waterfall-amount">2,000</span>
+                                    </div>
+                                    <div class="waterfall-segment insurance" style="width: 0%;" id="waterfall-insurance">
+                                        <span class="waterfall-label">Insurance</span>
+                                        <span class="waterfall-amount">0</span>
+                                    </div>
+                                    <div class="waterfall-segment residual" style="width: 60%;" id="waterfall-residual">
+                                        <span class="waterfall-label">Agency (Residual)</span>
+                                        <span class="waterfall-amount">3,000</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settlement-details">
+                                <div class="settlement-row">
+                                    <div class="settlement-icon">1</div>
+                                    <div class="settlement-content">
+                                        <div class="settlement-title">Pledgee First</div>
+                                        <div class="settlement-desc">Maya Chen receives 2,000 USDC</div>
+                                        <div class="settlement-amount accent">+2,000 USDC</div>
+                                    </div>
+                                </div>
+                                <div class="settlement-row">
+                                    <div class="settlement-icon">2</div>
+                                    <div class="settlement-content">
+                                        <div class="settlement-title">Insurance Top-Up</div>
+                                        <div class="settlement-desc">No shortfall (work accepted)</div>
+                                        <div class="settlement-amount">0 USDC</div>
+                                    </div>
+                                </div>
+                                <div class="settlement-row">
+                                    <div class="settlement-icon">3</div>
+                                    <div class="settlement-content">
+                                        <div class="settlement-title">Residual</div>
+                                        <div class="settlement-desc">Northline Agency receives remainder</div>
+                                        <div class="settlement-amount">+3,000 USDC</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small"><strong>Burned CYT</strong></p>
+                                <p class="text-muted small">Maya's claim badge burned on payout. Conditional pledge fully honored.</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="navigateTo('screen-score')">View Score Impact</button>
+                        </div>
+                    </div>
+
+                    <!-- Score Screen -->
+                    <div class="screen" id="screen-score">
+                        <div class="screen-header">
+                            <h2>Settlement Score</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="score-hero">
+                                <div class="score-main" id="score-main">847</div>
+                                <div class="score-tier">
+                                    <span class="tier-badge tier-2">Tier 2</span>
+                                    <span class="tier-cap">70% pledge cap</span>
+                                </div>
+                                <div class="score-change" id="score-change"></div>
+                            </div>
+
+                            <div class="tier-progress">
+                                <div class="tier-bar">
+                                    <div class="tier-fill" style="width: 74.7%;" id="tier-fill"></div>
+                                </div>
+                                <div class="tier-labels">
+                                    <span>T1 (700)</span>
+                                    <span>T2 (800)</span>
+                                    <span>T3 (900)</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-grid-2">
+                                <div class="stat-card">
+                                    <div class="stat-label">Settled Volume</div>
+                                    <div class="stat-value" id="settled-volume">142K</div>
+                                    <div class="stat-sublabel">USDC lifetime</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Clean Rate</div>
+                                    <div class="stat-value" id="clean-rate">94.2%</div>
+                                    <div class="stat-sublabel">no disputes</div>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Recent Activity</h3>
+                            </div>
+                            <div class="activity-list" id="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon settled">✓</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Escrow settled</div>
+                                        <div class="activity-desc">northline.eth · 10,000 USDC</div>
+                                    </div>
+                                    <div class="activity-score neutral">+0</div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon settled">✓</div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Escrow settled</div>
+                                        <div class="activity-desc">designstudio.eth · 5,000 USDC</div>
+                                    </div>
+                                    <div class="activity-score positive">+12</div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small"><strong>Powered by The Graph</strong></p>
+                                <p class="text-muted small">Settlement scores aggregate your on-chain payment history. Sybil-resistant via World ID. Could become a public credit primitive.</p>
+                            </div>
+
+                            <div class="verified-badge-large">
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M12 0l2 8h8l-6 5 2 8-6-5-6 5 2-8-6-5h8z" fill="var(--accent)"/>
+                                </svg>
+                                World ID Verified
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agents Tab Home -->
+                    <div class="screen" id="screen-agents">
+                        <div class="screen-header">
+                            <h2>Agent Economy</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="info-card accent-border">
+                                <p><strong>Same primitive, faster execution</strong></p>
+                                <p class="text-muted">Agents inherit their owner's settlement score (tier - 1). Verifier contracts replace human approval.</p>
+                            </div>
+
+                            <div class="agent-card" onclick="navigateTo('screen-agent-job')">
+                                <div class="agent-header">
+                                    <div class="agent-avatar">🤖</div>
+                                    <div>
+                                        <div class="agent-name">orchestrator.agent</div>
+                                        <div class="agent-owner">Owned by northline.eth <span class="verified-mini">✓</span></div>
+                                    </div>
+                                    <div class="status-pill status-funded">Active</div>
+                                </div>
+                                <div class="agent-body">
+                                    <div class="agent-stat">
+                                        <span class="agent-stat-label">Escrow</span>
+                                        <span class="agent-stat-value">5,000 USDC</span>
+                                    </div>
+                                    <div class="agent-stat">
+                                        <span class="agent-stat-label">Score Tier</span>
+                                        <span class="agent-stat-value">1 (from owner T2)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>How It Works</h3>
+                            </div>
+                            <div class="timeline-card">
+                                <div class="timeline-item">
+                                    <div class="timeline-dot active"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Human funds escrow to agent</div>
+                                        <div class="timeline-time">with IVerifier gate</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot active"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Agent pledges to specialists</div>
+                                        <div class="timeline-time">backed by receivable</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-dot active"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Verifier approves → settles</div>
+                                        <div class="timeline-time">seconds, not days</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small text-muted">x402 micropayments flow alongside pledges. Conpay is contract law; x402 is the cash register.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agent Job Detail -->
+                    <div class="screen" id="screen-agent-job">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-agents')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Agent Escrow</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-avatar">🤖</div>
+                                    <div>
+                                        <div class="agent-name">orchestrator.agent</div>
+                                        <div class="agent-owner">Anchored to northline.eth <span class="verified-mini">✓</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Face Value</span>
+                                    <span class="detail-value">5,000 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Payer</span>
+                                    <span class="detail-value">humanfunder.eth <span class="verified-mini">✓</span></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Release Condition</span>
+                                    <span class="detail-value">IVerifier approval</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Verifier</span>
+                                    <span class="detail-value">0x7a8f...schema</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Agent Score</span>
+                                    <span class="detail-value">Tier 1 (owner T2 - 1)</span>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Pledges</h3>
+                            </div>
+                            <div class="pledge-card">
+                                <div class="pledge-header">
+                                    <div>
+                                        <div class="pledge-to">specialist.agent 🤖</div>
+                                        <div class="pledge-address">Owned by devteam.eth</div>
+                                    </div>
+                                    <div class="pledge-status status-pill status-accepted">Accepted</div>
+                                </div>
+                                <div class="pledge-body">
+                                    <div class="pledge-amount">1,500 USDC</div>
+                                    <div class="pledge-type">Conditional sub-escrow</div>
+                                </div>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>x402 Micropayments</h3>
+                            </div>
+                            <div class="micropayments-log">
+                                <div class="micropayment-item">
+                                    <div class="micropayment-service">dataservice.api</div>
+                                    <div class="micropayment-amount">0.05 USDC</div>
+                                </div>
+                                <div class="micropayment-item">
+                                    <div class="micropayment-service">dataservice.api</div>
+                                    <div class="micropayment-amount">0.05 USDC</div>
+                                </div>
+                                <div class="micropayment-item">
+                                    <div class="micropayment-service">dataservice.api</div>
+                                    <div class="micropayment-amount">0.05 USDC</div>
+                                </div>
+                                <div class="micropayment-summary">
+                                    <span>Total</span>
+                                    <span class="accent">0.15 USDC</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small"><strong>Verifier Check in Progress</strong></p>
+                                <p class="text-muted small">Test suite running. On pass: atomic tree settlement (specialist → orchestrator → human scores update).</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="navigateTo('screen-agent-settle')">Simulate Verifier Pass</button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Tree Settlement -->
+                    <div class="screen" id="screen-agent-settle">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-agent-job')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Atomic Settlement</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="success-card">
+                                <div class="success-icon">
+                                    <svg width="48" height="48" viewBox="0 0 48 48">
+                                        <circle cx="24" cy="24" r="22" stroke="var(--accent)" stroke-width="4" fill="none"/>
+                                        <path d="M14 24l8 8 12-12" stroke="var(--accent)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>Verifier Approved</h3>
+                                <p class="text-muted">Output passed schema check</p>
+                            </div>
+
+                            <div class="section-header">
+                                <h3>Settlement Tree</h3>
+                            </div>
+                            <div class="settlement-tree" id="settlement-tree">
+                                <div class="tree-node" id="tree-specialist">
+                                    <div class="tree-node-icon">🤖</div>
+                                    <div class="tree-node-content">
+                                        <div class="tree-node-name">specialist.agent</div>
+                                        <div class="tree-node-amount accent">+1,500 USDC</div>
+                                    </div>
+                                    <div class="tree-node-status" id="tree-specialist-status">⏳</div>
+                                </div>
+                                <div class="tree-line"></div>
+                                <div class="tree-node" id="tree-orchestrator">
+                                    <div class="tree-node-icon">🤖</div>
+                                    <div class="tree-node-content">
+                                        <div class="tree-node-name">orchestrator.agent</div>
+                                        <div class="tree-node-amount">+3,485 USDC</div>
+                                    </div>
+                                    <div class="tree-node-status" id="tree-orchestrator-status">⏳</div>
+                                </div>
+                                <div class="tree-line"></div>
+                                <div class="tree-node" id="tree-human">
+                                    <div class="tree-node-icon">👤</div>
+                                    <div class="tree-node-content">
+                                        <div class="tree-node-name">humanfunder.eth</div>
+                                        <div class="tree-node-amount accent">Rebate + Scores</div>
+                                    </div>
+                                    <div class="tree-node-status" id="tree-human-status">⏳</div>
+                                </div>
+                            </div>
+
+                            <div class="detail-card">
+                                <div class="detail-row">
+                                    <span>Specialist (junior)</span>
+                                    <span class="detail-value accent">1,500 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Orchestrator (residual)</span>
+                                    <span class="detail-value">3,485 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>x402 fees deducted</span>
+                                    <span class="detail-value">0.15 USDC</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Yield rebate (payer)</span>
+                                    <span class="detail-value accent">~15 USDC</span>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <p class="small text-muted">Settlement anchored to each agent's verified human owner. Scores update in seconds.</p>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="btn-primary" onclick="animateTreeSettle()">Execute Settlement</button>
+                        </div>
+                    </div>
+
+                    <!-- MCP Trust Query -->
+                    <div class="screen" id="screen-mcp-trust">
+                        <div class="screen-header">
+                            <button class="btn-back" onclick="navigateTo('screen-agents')">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <h2>Trust Query</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="query-card">
+                                <div class="query-icon">💬</div>
+                                <div class="query-text">"Can I trust a 5,000 USDC pledge from this agent?"</div>
+                            </div>
+
+                            <div class="trust-result">
+                                <div class="trust-answer">
+                                    <svg width="32" height="32" viewBox="0 0 32 32">
+                                        <circle cx="16" cy="16" r="14" stroke="var(--accent)" stroke-width="3" fill="none"/>
+                                        <path d="M10 16l4 4 8-8" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <h3>Yes, with moderate confidence</h3>
+                                </div>
+                                <div class="trust-factors">
+                                    <div class="trust-factor">
+                                        <div class="trust-factor-icon">✓</div>
+                                        <div>
+                                            <div class="trust-factor-title">Owner verified</div>
+                                            <div class="trust-factor-desc">northline.eth · World ID · Tier 2</div>
+                                        </div>
+                                    </div>
+                                    <div class="trust-factor">
+                                        <div class="trust-factor-icon">✓</div>
+                                        <div>
+                                            <div class="trust-factor-title">Parent escrow funded</div>
+                                            <div class="trust-factor-desc">5,000 USDC locked on-chain</div>
+                                        </div>
+                                    </div>
+                                    <div class="trust-factor">
+                                        <div class="trust-factor-icon">✓</div>
+                                        <div>
+                                            <div class="trust-factor-title">Pledge irrevocable</div>
+                                            <div class="trust-factor-desc">Assignment recorded, verifiable</div>
+                                        </div>
+                                    </div>
+                                    <div class="trust-factor">
+                                        <div class="trust-factor-icon">!</div>
+                                        <div>
+                                            <div class="trust-factor-title">Agent score lower</div>
+                                            <div class="trust-factor-desc">Tier 1 (owner tier - 1)</div>
+                                        </div>
+                                    </div>
+                                    <div class="trust-factor">
+                                        <div class="trust-factor-icon">✓</div>
+                                        <div>
+                                            <div class="trust-factor-title">Clean settlement history</div>
+                                            <div class="trust-factor-desc">Owner 94.2% no-dispute rate</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card accent-border">
+                                <p><strong>Powered by Subgraph</strong></p>
+                                <p class="text-muted">Real-time on-chain data: escrow state, pledge assignments, settlement scores, owner verification.</p>
+                            </div>
+
+                            <div class="tagline-card">
+                                <p class="tagline-text">x402 is the agent economy's cash register</p>
+                                <p class="tagline-text accent">Conpay is its contract law</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Tab Bar -->
+                <div id="bottom-tabs">
+                    <div class="tab-item active" data-tab="home" onclick="switchTab('home')">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span>Home</span>
+                    </div>
+                    <div class="tab-item" data-tab="escrows" onclick="switchTab('escrows')">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <rect x="3" y="7" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M7 11h10M7 15h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Escrows</span>
+                    </div>
+                    <div class="tab-item" data-tab="score" onclick="switchTab('score')">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Score</span>
+                    </div>
+                    <div class="tab-item" data-tab="agents" onclick="switchTab('agents')">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <rect x="6" y="4" width="12" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="12" cy="10" r="2" fill="currentColor"/>
+                            <path d="M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Agents</span>
+                    </div>
+                </div>
+
+                <!-- Role Switcher Modal -->
+                <div id="role-switcher" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Switch Role</h3>
+                            <button class="btn-close" onclick="toggleRoleSwitch()">×</button>
+                        </div>
+                        <div class="role-list">
+                            <div class="role-item" onclick="switchRole('Client')">
+                                <div class="role-name">Client</div>
+                                <div class="role-desc">Payer · client.eth</div>
+                            </div>
+                            <div class="role-item" onclick="switchRole('Agency')">
+                                <div class="role-name">Agency</div>
+                                <div class="role-desc">Payee · northline.eth</div>
+                            </div>
+                            <div class="role-item" onclick="switchRole('Designer')">
+                                <div class="role-name">Designer</div>
+                                <div class="role-desc">Pledgee · mayachen.eth</div>
+                            </div>
+                            <div class="role-item" onclick="switchRole('Arbiter')">
+                                <div class="role-name">Arbiter</div>
+                                <div class="role-desc">Neutral third party · ethlegal.eth</div>
+                            </div>
+                            <div class="role-item" onclick="switchRole('Agent')">
+                                <div class="role-name">Agent Owner</div>
+                                <div class="role-desc">orchestrator.agent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
