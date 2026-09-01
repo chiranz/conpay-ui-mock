@@ -1,6 +1,6 @@
 # Conpay — Invoices as Collateral
 
-> A high-fidelity mobile-first HTML prototype for ETHOnline 2026
+> A high-fidelity responsive HTML prototype for ETHOnline 2026
 
 **One-liner:** Invoices are promises. Conpay makes them collateral.  
 **Pitch:** Humans today, agents tomorrow — same primitive.
@@ -8,6 +8,11 @@
 ## What It Is
 
 Conpay is a clickable UI mock prototype demonstrating a DeFi protocol where funded USDC invoices become collateral you can earn yield on and pledge to subcontractors. This is a **demo interface only** — no wallet connection, no chain calls, fake data with instant transitions.
+
+The prototype is **fully responsive** with three breakpoints:
+- **Mobile (< 768px)**: Full-viewport app with bottom tab navigation
+- **Tablet (768-1199px)**: Wider cards, 2-column grids, more breathing room
+- **Desktop (≥1200px)**: Left sidebar navigation, grid dashboard layouts
 
 ### Core Concepts
 
@@ -49,8 +54,10 @@ php -S localhost:8000
 Then open `http://localhost:8000` in your browser.
 
 ### Best Experience
-- View on mobile device (390×844) or resize browser to phone dimensions
-- On desktop, the interface displays in a centered phone bezel
+- **Mobile**: Full-screen app with bottom tabs (phone or narrow browser window)
+- **Tablet**: Wider 2-column layout (768-1199px)
+- **Desktop**: Left sidebar navigation with grid dashboard (1200px+)
+- Resize your browser to see all three layouts in action
 - Use Chrome, Safari, or Firefox for best compatibility
 
 ## Demo Flow
@@ -104,7 +111,7 @@ Click **"▶ Play Demo"** on the splash screen to watch the full 4-minute story:
 - **Plain HTML/CSS/JS** — No framework, no build step, no npm dependencies
 - **GitHub Pages Ready** — All relative paths, works at subdirectory URLs
 - **File Protocol Compatible** — Can open directly as `file://` in browser
-- **Mobile-first** — Designed for 390×844 (iPhone 13/14)
+- **Fully Responsive** — Mobile-first with tablet and desktop layouts
 - **Dark premium fintech** — Deep charcoal, mint accent (#00d9c0), USDC blue secondary
 - **Microinteractions** — Live yield ticker, waterfall animations, CYT card flip, score ticking
 
@@ -117,8 +124,9 @@ Click **"▶ Play Demo"** on the splash screen to watch the full 4-minute story:
 ✓ CYT badge animation on pledge acceptance  
 ✓ Settlement score drop on PayerFault  
 ✓ Agent tree settlement animation  
-✓ Phone bezel on desktop, full-bleed on mobile  
-✓ Bottom tab navigation (Home, Escrows, Score, Agents)  
+✓ Responsive: mobile (< 768px), tablet (768-1199px), desktop (≥1200px)  
+✓ Mobile: bottom tabs · Desktop: left sidebar with logo  
+✓ Desktop dashboard: 2-column grid layouts  
 
 ## Design Notes
 
