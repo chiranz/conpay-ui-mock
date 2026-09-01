@@ -37,21 +37,16 @@ body {
     overflow-x: hidden;
 }
 
-/* Device Frame - Desktop Only */
+/* Device Frame - Mobile First */
 #device-frame {
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000;
-    padding: 20px;
+    background: var(--bg-primary);
 }
 
 #phone-bezel {
     width: 100%;
-    height: 100vh;
-    max-width: 100%;
+    min-height: 100vh;
     background: var(--bg-primary);
     position: relative;
     overflow: hidden;
@@ -59,53 +54,33 @@ body {
     flex-direction: column;
 }
 
-/* Desktop: show phone frame */
+/* Tablet and up: no phone frame, fill viewport */
 @media (min-width: 768px) {
+    #device-frame {
+        display: flex;
+        padding: 0;
+    }
+    
     #phone-bezel {
-        width: 390px;
-        height: 844px;
-        max-width: 390px;
-        border-radius: 40px;
-        box-shadow: 0 0 0 12px #1a1a1a,
-                    0 0 0 14px #2a2a2a,
-                    0 40px 80px rgba(0, 0, 0, 0.4);
+        width: 100%;
+        height: 100vh;
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
     }
 }
 
-/* Status Bar */
+/* Status Bar - Hidden on all screens (fake iOS chrome) */
 .status-bar {
-    height: 47px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    background: var(--bg-primary);
-    position: relative;
-    z-index: 100;
-    flex-shrink: 0;
+    display: none;
 }
 
 .status-left, .status-right {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.status-right svg {
-    opacity: 0.8;
+    display: none;
 }
 
 .status-notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: 30px;
-    background: #000;
-    border-radius: 0 0 18px 18px;
+    display: none;
 }
 
 /* App Container */
@@ -1671,4 +1646,425 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--border);
+}
+
+/* ========================================
+   RESPONSIVE LAYOUTS
+   ======================================== */
+
+/* TABLET: 768px - 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    /* Wider content padding */
+    .screen-content {
+        padding: 32px 40px;
+        gap: 24px;
+    }
+    
+    .screen-header {
+        padding: 24px 40px 20px;
+    }
+    
+    .screen-footer {
+        padding: 20px 40px 32px;
+    }
+    
+    /* Two-column stat grids */
+    .stat-grid {
+        gap: 16px;
+    }
+    
+    .stat-card {
+        padding: 24px;
+    }
+    
+    /* Larger typography */
+    .balance-amount {
+        font-size: 52px;
+    }
+    
+    .screen-header h2 {
+        font-size: 32px;
+    }
+    
+    /* Wider cards with more breathing room */
+    .balance-card,
+    .escrow-card,
+    .info-card,
+    .detail-card,
+    .pledge-card {
+        padding: 24px;
+    }
+    
+    /* Make splash content more spacious */
+    .splash-content {
+        padding: 60px 48px;
+    }
+    
+    .splash-title {
+        font-size: 56px;
+    }
+    
+    .splash-tagline {
+        font-size: 20px;
+    }
+    
+    /* Bottom tabs: show as sidebar on tablet */
+    #bottom-tabs {
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px 40px 24px;
+    }
+    
+    .tab-item {
+        flex-direction: row;
+        padding: 12px 20px;
+        gap: 8px;
+        border-radius: 12px;
+        flex: 0 1 auto;
+    }
+    
+    .tab-item span {
+        font-size: 14px;
+    }
+}
+
+/* DESKTOP: 1200px and up */
+@media (min-width: 1200px) {
+    #phone-bezel {
+        flex-direction: row;
+    }
+    
+    /* Left Sidebar Navigation */
+    #app-container {
+        flex-direction: row;
+    }
+    
+    /* Create sidebar from bottom tabs */
+    #bottom-tabs {
+        flex-direction: column;
+        width: 280px;
+        border-right: 1px solid var(--border);
+        border-top: none;
+        padding: 32px 24px;
+        gap: 8px;
+        background: var(--bg-secondary);
+        flex-shrink: 0;
+        height: 100vh;
+        overflow-y: auto;
+    }
+    
+    /* Logo/brand at top of sidebar */
+    #bottom-tabs::before {
+        content: 'Conpay';
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 32px;
+        display: block;
+        letter-spacing: -0.5px;
+    }
+    
+    .tab-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 14px 16px;
+        border-radius: 10px;
+        gap: 12px;
+        flex: 0 0 auto;
+    }
+    
+    .tab-item:hover {
+        background: var(--bg-tertiary);
+    }
+    
+    .tab-item.active {
+        background: rgba(0, 217, 192, 0.1);
+        border: 1px solid var(--accent);
+    }
+    
+    .tab-item span {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    
+    .tab-item svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    /* Main content area */
+    #screens-container {
+        flex: 1;
+        width: calc(100% - 280px);
+    }
+    
+    /* Desktop screen header with role switcher positioned better */
+    .screen-header {
+        padding: 32px 48px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .screen-header h2 {
+        font-size: 36px;
+    }
+    
+    .screen-content {
+        padding: 40px 48px;
+        gap: 32px;
+    }
+    
+    .screen-footer {
+        padding: 24px 48px 40px;
+    }
+    
+    /* Dashboard grid layout for Home screen */
+    #screen-home .screen-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 24px;
+    }
+    
+    /* Balance card spans full width */
+    #screen-home .balance-card {
+        grid-column: 1 / -1;
+        padding: 32px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: center;
+    }
+    
+    #screen-home .balance-card .balance-detail {
+        grid-column: 1 / -1;
+    }
+    
+    /* Stats side by side */
+    #screen-home .stat-grid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .stat-card {
+        padding: 28px;
+    }
+    
+    /* Escrow card and info card side by side */
+    #screen-home .escrow-card {
+        grid-column: 1 / 2;
+    }
+    
+    #screen-home .info-card {
+        grid-column: 2 / 3;
+    }
+    
+    /* Two-column detail layouts */
+    #screen-escrow-detail .screen-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    
+    #screen-escrow-detail .escrow-state-card {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-escrow-detail .detail-card {
+        grid-column: 1 / 2;
+        grid-row: 2 / 4;
+    }
+    
+    #screen-escrow-detail .section-header:first-of-type {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    
+    #screen-escrow-detail .yield-split-detail {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+    }
+    
+    #screen-escrow-detail .section-header:nth-of-type(2) {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-escrow-detail #pledges-list {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-escrow-detail .action-buttons {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        gap: 16px;
+    }
+    
+    #screen-escrow-detail .action-buttons button {
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    /* Score screen grid */
+    #screen-score .screen-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    
+    #screen-score .score-hero {
+        grid-column: 1 / -1;
+        padding: 48px 32px;
+    }
+    
+    #screen-score .tier-progress {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-score .stat-grid-2 {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    #screen-score .section-header {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-score .activity-list {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-score .info-card {
+        grid-column: 1 / 2;
+    }
+    
+    #screen-score .verified-badge-large {
+        grid-column: 2 / 3;
+    }
+    
+    /* Agent screens wider layout */
+    #screen-agents .screen-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    #screen-agent-job .screen-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    
+    #screen-agent-job .agent-card {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-agent-job .detail-card {
+        grid-column: 1 / 2;
+        grid-row: 2 / 4;
+    }
+    
+    #screen-agent-job .section-header:first-of-type {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    
+    #screen-agent-job .pledge-card {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+    }
+    
+    #screen-agent-job .section-header:nth-of-type(2) {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-agent-job .micropayments-log {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-agent-job .info-card {
+        grid-column: 1 / -1;
+    }
+    
+    #screen-agent-job .screen-footer {
+        grid-column: 1 / -1;
+    }
+    
+    /* Waterfall visualization larger */
+    .waterfall-viz {
+        padding: 32px;
+    }
+    
+    .waterfall-bar {
+        height: 80px;
+    }
+    
+    /* Splash screen centered */
+    .splash-content {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 80px 48px;
+    }
+    
+    .splash-title {
+        font-size: 72px;
+    }
+    
+    .splash-tagline {
+        font-size: 22px;
+    }
+    
+    .splash-subtitle {
+        font-size: 18px;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-outline {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Form screens: centered narrower layout */
+    #screen-create-escrow .screen-content,
+    #screen-create-pledge .screen-content,
+    #screen-request-release .screen-content,
+    #screen-dispute .screen-content,
+    #screen-arbiter .screen-content,
+    #screen-world-id .screen-content {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    /* Modal full screen on desktop */
+    .modal {
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        border-radius: 16px;
+        max-width: 500px;
+        max-height: 70vh;
+    }
+    
+    /* Larger balance amount */
+    .balance-amount {
+        font-size: 64px;
+    }
+    
+    /* Escrow amount scaling */
+    .escrow-amount {
+        font-size: 28px;
+    }
+    
+    /* Better spacing for cards */
+    .balance-card,
+    .escrow-card,
+    .pledge-card,
+    .agent-card,
+    .detail-card,
+    .info-card {
+        padding: 28px;
+    }
 }
