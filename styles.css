@@ -1739,6 +1739,10 @@ body {
     #app-container {
         flex-direction: row;
     }
+
+    #bottom-tabs {
+        order: -1;
+    }
     
     /* Create sidebar from bottom tabs */
     #bottom-tabs {
